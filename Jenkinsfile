@@ -14,6 +14,7 @@ pipeline {
     stage('build') {
       steps {
         script {
+            sh 'sleep 9999'
             sh './gradlew build'
           }
         }
