@@ -26,12 +26,10 @@ build/tmp
 .gradle
 
 # Package Files #
-*.war
 *.ear
 
 # Scala Related Files
 *.log
-*.class
 
 # sbt specific
 dist/*
