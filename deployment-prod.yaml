@@ -20,7 +20,7 @@ spec:
           livenessProbe:
             failureThreshold: 1
             httpGet:
-              path: /jersey-starterkit/rest/hello
+              path: /sample-java-webapp-jenkins/rest/hello
               port: 8080
               scheme: HTTP
             periodSeconds: 60
@@ -30,7 +30,7 @@ spec:
           readinessProbe:
             failureThreshold: 1
             httpGet:
-              path: /jersey-starterkit/rest/hello
+              path: /sample-java-webapp-jenkins/rest/hello
               port: 8080
               scheme: HTTP
             periodSeconds: 60
@@ -40,7 +40,7 @@ spec:
           startupProbe:
             failureThreshold: 30
             httpGet:
-              path: /jersey-starterkit/rest/hello
+              path: /sample-java-webapp-jenkins/rest/hello
               port: 8080
               scheme: HTTP
             periodSeconds: 10
