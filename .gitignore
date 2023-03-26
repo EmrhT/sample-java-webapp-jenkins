@@ -18,9 +18,12 @@ local.properties
 
 # Build related
 bin/**
-build
+build/dependency-cache
+build/reports
+build/resources
+build/test-results
+build/tmp
 .gradle
-*.class
 
 # Package Files #
 *.war
