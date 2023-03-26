@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   labels:
     app: web-app
-  name: django-web
-  namespace: django-brad-test
+  name: java-webapp
+  namespace: sample-java-webapp-jenkins-test
 spec:
   replicas: 1
   selector:
@@ -16,48 +16,12 @@ spec:
         app: web-app
     spec:
       containers:
-        - args:
-            - '-c'
-            - gunicorn btre.wsgi:application --bind 0.0.0.0:8000
-          command:
-            - /bin/bash
-          env:
-            - name: ALLOWED_HOSTS
-              valueFrom:
-                secretKeyRef:
-                  key: allowed-hosts
-                  name: emlak-secret
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  key: db-name
-                  name: emlak-secret
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  key: db-user
-                  name: emlak-secret
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  key: db-pass
-                  name: emlak-secret
-            - name: DB_HOST
-              valueFrom:
-                secretKeyRef:
-                  key: db-host
-                  name: emlak-secret
-            - name: SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: secret-key
-                  name: emlak-secret
-          image: harbor.example.com/mantislogic/django-brad:{{GIT_COMMIT}}
+        - image: harbor.example.com/mantislogic/django-brad:{{GIT_COMMIT}}
           livenessProbe:
             failureThreshold: 1
             httpGet:
-              path: /admin
-              port: 8000
+              path: /jersey-starterkit/rest/hello
+              port: 8080
               scheme: HTTP
             periodSeconds: 60
             successThreshold: 1
@@ -66,8 +30,8 @@ spec:
           readinessProbe:
             failureThreshold: 1
             httpGet:
-              path: /admin
-              port: 8000
+              path: /jersey-starterkit/rest/hello
+              port: 8080
               scheme: HTTP
             periodSeconds: 60
             successThreshold: 1
@@ -76,16 +40,9 @@ spec:
           startupProbe:
             failureThreshold: 30
             httpGet:
-              path: /admin
-              port: 8000
+              path: /jersey-starterkit/rest/hello
+              port: 8080
               scheme: HTTP
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          volumeMounts:
-            - mountPath: /django_brad/media
-              name: media
-      volumes:
-        - name: media
-          persistentVolumeClaim:
-            claimName: media-pvc
