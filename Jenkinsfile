@@ -15,6 +15,7 @@ pipeline {
         script {
             sh 'apk --no-cache add openjdk8'
             sh 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk; export PATH=$JAVA_HOME/bin:$PATH; ./gradlew build'
+            sh 'sleep 999999'
           }
         }
       }
