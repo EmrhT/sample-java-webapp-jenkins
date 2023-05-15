@@ -5,12 +5,12 @@ pipeline {
     }
   }
   stages {
-    stage('prep') {
+    stage('Preparation') {
       steps {
         git url: 'https://github.com/EmrhT/sample-java-webapp-jenkins.git'
       }
     }
-    stage('build') {
+    stage('Build') {
       steps {
         script {
             sh 'apk --no-cache add openjdk8'
@@ -18,14 +18,14 @@ pipeline {
           }
         }
       }
-     stage('unit test') {
+     stage('Unit Test') {
       steps {
         script {
             sh 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk; export PATH=$JAVA_HOME/bin:$PATH; ./gradlew test'
           }
         }
       }
-    stage('Sonar-Scanner') {
+    stage('Sonar Scanner') {
       steps {
         script {
           def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
