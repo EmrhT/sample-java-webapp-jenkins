@@ -5,9 +5,14 @@ pipeline {
     }
   }
   stages {
-    stage('Preparation') {
+    stage('Developer Cloned the Repo') {
       steps {
         git url: 'https://github.com/EmrhT/sample-java-webapp-jenkins.git'
+      }
+    }
+    stage('Developer Committed') {
+      steps {
+        sh 'true'
       }
     }
     stage('Build') {
@@ -63,6 +68,11 @@ pipeline {
       steps {
           sh 'podman run --tls-verify=false -t harbor.example.com/mantislogic/zap2docker-stable:2.12.0 zap-baseline.py -t http://webapp-svc.sample-java-webapp-jenkins-test.svc.cluster.local:8080/Java_Webapp_Pipeline/rest/hello | tee owasp-results.txt || true'
           sh 'cat owasp-results.txt | egrep  "^FAIL-NEW: 0.*FAIL-INPROG: 0"'
+      }
+    }
+    stage ('Merge Feature Branch to Master') {
+      steps {
+        sh 'true'
       }
     }
     stage ('Deploy to K8S Prod Namespace') {
